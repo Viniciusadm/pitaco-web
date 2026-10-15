@@ -10,7 +10,7 @@ import { useOnline } from "@/hooks/use-online";
 import { useAuthStore } from "@/store/auth-store";
 
 export const Route = createFileRoute("/app/participantes")({
-  head: () => ({ meta: [{ title: "Participantes - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Participantes - Pitaco" }] }),
   component: ParticipantsPage,
 });
 

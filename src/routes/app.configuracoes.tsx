@@ -34,7 +34,7 @@ import { useAuthStore } from "@/store/auth-store";
 import type { ScoringRuleKey } from "@/api/types";
 
 export const Route = createFileRoute("/app/configuracoes")({
-  head: () => ({ meta: [{ title: "Configurações - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Configurações - Pitaco" }] }),
   component: SettingsPage,
 });
 

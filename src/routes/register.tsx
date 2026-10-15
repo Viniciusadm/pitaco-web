@@ -22,7 +22,7 @@ export const Route = createFileRoute("/register")({
       throw redirect({ to: "/app" });
     }
   },
-  head: () => ({ meta: [{ title: "Criar conta - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Criar conta - Pitaco" }] }),
   component: RegisterPage,
 });
 

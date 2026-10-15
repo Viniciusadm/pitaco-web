@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
   },
   head: () => ({
     meta: [
-      { title: "Bolão Copa - Crie ou entre em um bolão" },
+      { title: "Pitaco - Crie ou entre em um bolão" },
       {
         name: "description",
         content:

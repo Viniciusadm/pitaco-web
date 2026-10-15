@@ -14,7 +14,7 @@ import { useOnline } from "@/hooks/use-online";
 import type { PreferenceItem } from "@/api/types";
 
 export const Route = createFileRoute("/app/preferencias")({
-  head: () => ({ meta: [{ title: "Preferências - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Preferências - Pitaco" }] }),
   beforeLoad: () => {
     if (typeof window !== "undefined" && !getToken()) {
       throw redirect({ to: "/login" });

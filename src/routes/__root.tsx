@@ -76,14 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Bolão Copa - Acompanhe seus palpites" },
+      { title: "Pitaco - Dá seu pitaco antes do apito" },
       {
         name: "description",
         content:
           "Crie e participe de bolões da Copa do Mundo com ranking ao vivo, palpites e histórico de pontos.",
       },
       { name: "theme-color", content: "#15191F" },
-      { property: "og:title", content: "Bolão Copa" },
+      { property: "og:title", content: "Pitaco" },
       { property: "og:description", content: "Crie bolões, registre palpites e suba no ranking." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

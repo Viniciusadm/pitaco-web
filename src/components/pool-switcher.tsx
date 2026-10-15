@@ -42,7 +42,7 @@ export function PoolSwitcher({ variant = "sidebar" }: { variant?: "sidebar" | "t
             <Trophy className={cn("text-primary-foreground", isTopbar ? "h-4 w-4" : "h-5 w-5")} />
           </div>
           <div className={cn("min-w-0", isTopbar && "text-right")}>
-            <div className="font-display text-sm font-semibold leading-tight">Bolão Copa</div>
+            <div className="font-display text-sm font-semibold leading-tight">Pitaco</div>
             <div
               className={cn(
                 "truncate text-muted-foreground",

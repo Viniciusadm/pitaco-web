@@ -23,7 +23,7 @@ export const Route = createFileRoute("/login")({
       throw redirect({ to: "/app" });
     }
   },
-  head: () => ({ meta: [{ title: "Entrar - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Entrar - Pitaco" }] }),
   component: LoginPage,
 });
 

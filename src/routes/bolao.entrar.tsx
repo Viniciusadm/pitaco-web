@@ -13,7 +13,7 @@ import { useOnline } from "@/hooks/use-online";
 import { useAuthStore } from "@/store/auth-store";
 
 export const Route = createFileRoute("/bolao/entrar")({
-  head: () => ({ meta: [{ title: "Entrar em bolão - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Entrar em bolão - Pitaco" }] }),
   validateSearch: (s): { code?: string } => ({
     code: typeof s.code === "string" ? s.code : undefined,
   }),

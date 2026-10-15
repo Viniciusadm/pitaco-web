@@ -13,7 +13,7 @@ import type { MatchResponse } from "@/api/types";
 import type { Team } from "@/api/types";
 
 export const Route = createFileRoute("/app/historico")({
-  head: () => ({ meta: [{ title: "Histórico - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Histórico - Pitaco" }] }),
   component: HistoryPage,
 });
 

@@ -13,7 +13,7 @@ import { useOnline } from "@/hooks/use-online";
 import type { Notification } from "@/api/types";
 
 export const Route = createFileRoute("/app/notificacoes")({
-  head: () => ({ meta: [{ title: "Notificações - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Notificações - Pitaco" }] }),
   component: NotificationsPage,
 });
 

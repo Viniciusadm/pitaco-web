@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { RankingEntry } from "@/api/types";
 
 export const Route = createFileRoute("/app/ranking")({
-  head: () => ({ meta: [{ title: "Ranking - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Ranking - Pitaco" }] }),
   component: RankingPage,
 });
 

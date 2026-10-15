@@ -69,7 +69,7 @@ export function JoinPoolDialog({
           <Label htmlFor="entrar-bolao-code">Código de convite</Label>
           <Input
             id="entrar-bolao-code"
-            placeholder="Ex: COPA-2026-XK7"
+            placeholder="Ex: 3F9A1C7B2E"
             value={code}
             onChange={(e) => setCode(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleJoin()}

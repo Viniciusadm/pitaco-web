@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Crie e participe de bolões da Copa do Mundo com ranking ao vivo, palpites e histórico de pontos.",
+          "Crie e participe de bolões de futebol com ranking ao vivo, palpites e histórico de pontos.",
       },
       { name: "theme-color", content: "#15191F" },
       { property: "og:title", content: "Pitaco" },

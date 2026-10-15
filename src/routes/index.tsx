@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Crie seu bolão da Copa do Mundo ou entre em um existente. Palpites, ranking e história em um só lugar.",
+          "Crie seu bolão de futebol ou entre em um existente. Palpites, ranking e história em um só lugar.",
       },
     ],
   }),
@@ -40,7 +40,7 @@ function Landing() {
 
       <section className="relative z-10 mx-auto max-w-6xl px-6 pt-12 pb-20 text-center sm:pt-20">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-          Copa do Mundo 2026
+          Bolões de futebol entre amigos
         </div>
         <h1 className="mt-6 font-display text-4xl font-bold leading-tight sm:text-6xl">
           Aposte com seus amigos.
@@ -48,8 +48,8 @@ function Landing() {
           <span className="gold-text">Vença com estilo.</span>
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-          Crie um bolão em segundos, convide a galera e acompanhe o ranking em tempo real durante
-          toda a Copa.
+          Crie um bolão em segundos, escolha o campeonato, convide a galera e acompanhe o ranking em
+          tempo real a cada rodada.
         </p>
 
         <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">

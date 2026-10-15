@@ -1,7 +1,7 @@
 {
-  "name": "Palpites",
-  "short_name": "Palpites",
-  "description": "Crie e participe de bolões da Copa do Mundo com ranking ao vivo, palpites e histórico de pontos.",
+  "name": "Pitaco",
+  "short_name": "Pitaco",
+  "description": "Crie e participe de bolões de futebol com ranking ao vivo, palpites e histórico de pontos.",
   "lang": "pt-BR",
   "start_url": "/",
   "scope": "/",

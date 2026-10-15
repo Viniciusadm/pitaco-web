@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, redirect, useRouterState } from "@tanstack/react-router";
-import { ArrowLeft, Flag, Calendar } from "lucide-react";
+import { ArrowLeft, Flag, Calendar, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getToken } from "@/api/session";
 
@@ -31,7 +31,13 @@ function AdminLayout() {
             </div>
           </div>
         </div>
-        <nav className="mx-auto flex max-w-5xl gap-1 px-3 pb-2">
+        <nav className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-3 pb-2">
+          <Tab
+            to="/admin/campeonatos"
+            active={pathname.startsWith("/admin/campeonatos")}
+            Icon={Trophy}
+            label="Campeonatos"
+          />
           <Tab
             to="/admin/selecoes"
             active={pathname === "/admin/selecoes"}

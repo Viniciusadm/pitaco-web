@@ -27,7 +27,7 @@ Main stack: React 19, TypeScript 5.8, Vite 8, TanStack Router and Query, Tailwin
 
 ## Running locally
 
-Copy the environment file, point `VITE_API_BASE_URL` at the API (with the `/api/v1` prefix) and set `VITE_TOURNAMENT_ID` to the tournament shown on the matches screen:
+Copy the environment file and point `VITE_API_BASE_URL` at the API (with the `/api/v1` prefix). Tournaments are managed in the admin area (`/admin/campeonatos`); pools pick an active tournament when they are created:
 
 ```bash
 cp .env.example .env

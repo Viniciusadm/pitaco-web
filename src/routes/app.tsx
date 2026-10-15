@@ -17,8 +17,6 @@ export const Route = createFileRoute("/app")({
   component: AppLayout,
 });
 
-const tournamentId = import.meta.env.VITE_TOURNAMENT_ID;
-
 function AppLayout() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -36,8 +34,7 @@ function AppLayout() {
     const list = pools.data;
     if (!list || list.length === 0) return null;
     if (poolId && list.some((p) => p.id === poolId)) return poolId;
-    const byTournament = list.find((p) => p.tournament_id === tournamentId);
-    return (byTournament ?? list[0]).id;
+    return list[0].id;
   }, [pools.data, poolId]);
 
   useEffect(() => {

@@ -16,21 +16,25 @@ import {
 import { useTeams } from "@/api/teams";
 import { useMatches } from "@/api/matches";
 import { useTournamentDetail } from "@/api/tournaments";
+import { usePools } from "@/api/pools";
+import { useAuthStore } from "@/store/auth-store";
 import { toMatch, toTeam } from "@/api/adapters";
 import { formatGroupDate } from "@/lib/datetime";
 import { cn } from "@/lib/utils";
 import type { Team } from "@/api/types";
 
 export const Route = createFileRoute("/app/jogos")({
-  head: () => ({ meta: [{ title: "Jogos - Bolão Copa" }] }),
+  head: () => ({ meta: [{ title: "Jogos - Pitaco" }] }),
   component: GamesPage,
 });
-
-const tournamentId = import.meta.env.VITE_TOURNAMENT_ID;
 
 const TBD: Team = { id: "", name: "A definir", flag: "🏳️", group: "" };
 
 function GamesPage() {
+  const poolId = useAuthStore((s) => s.poolId) ?? "";
+  const pools = usePools();
+  const tournamentId = pools.data?.find((p) => p.id === poolId)?.tournament_id ?? "";
+
   const tournament = useTournamentDetail(tournamentId);
   const teams = useTeams();
   const matches = useMatches(tournamentId);

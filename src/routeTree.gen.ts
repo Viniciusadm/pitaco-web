@@ -28,6 +28,8 @@ import { Route as AppHistoricoRouteImport } from './routes/app.historico'
 import { Route as AppConfiguracoesRouteImport } from './routes/app.configuracoes'
 import { Route as AdminSelecoesRouteImport } from './routes/admin.selecoes'
 import { Route as AdminPartidasRouteImport } from './routes/admin.partidas'
+import { Route as AdminCampeonatosIndexRouteImport } from './routes/admin.campeonatos.index'
+import { Route as AdminCampeonatosTournamentIdRouteImport } from './routes/admin.campeonatos.$tournamentId'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -124,6 +126,17 @@ const AdminPartidasRoute = AdminPartidasRouteImport.update({
   path: '/partidas',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCampeonatosIndexRoute = AdminCampeonatosIndexRouteImport.update({
+  id: '/campeonatos/',
+  path: '/campeonatos/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCampeonatosTournamentIdRoute =
+  AdminCampeonatosTournamentIdRouteImport.update({
+    id: '/campeonatos/$tournamentId',
+    path: '/campeonatos/$tournamentId',
+    getParentRoute: () => AdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -145,6 +158,8 @@ export interface FileRoutesByFullPath {
   '/bolao/entrar': typeof BolaoEntrarRoute
   '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
+  '/admin/campeonatos/$tournamentId': typeof AdminCampeonatosTournamentIdRoute
+  '/admin/campeonatos/': typeof AdminCampeonatosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -164,6 +179,8 @@ export interface FileRoutesByTo {
   '/bolao/entrar': typeof BolaoEntrarRoute
   '/admin': typeof AdminIndexRoute
   '/app': typeof AppIndexRoute
+  '/admin/campeonatos/$tournamentId': typeof AdminCampeonatosTournamentIdRoute
+  '/admin/campeonatos': typeof AdminCampeonatosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -186,6 +203,8 @@ export interface FileRoutesById {
   '/bolao/entrar': typeof BolaoEntrarRoute
   '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
+  '/admin/campeonatos/$tournamentId': typeof AdminCampeonatosTournamentIdRoute
+  '/admin/campeonatos/': typeof AdminCampeonatosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -209,6 +228,8 @@ export interface FileRouteTypes {
     | '/bolao/entrar'
     | '/admin/'
     | '/app/'
+    | '/admin/campeonatos/$tournamentId'
+    | '/admin/campeonatos/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -228,6 +249,8 @@ export interface FileRouteTypes {
     | '/bolao/entrar'
     | '/admin'
     | '/app'
+    | '/admin/campeonatos/$tournamentId'
+    | '/admin/campeonatos'
   id:
     | '__root__'
     | '/'
@@ -249,6 +272,8 @@ export interface FileRouteTypes {
     | '/bolao/entrar'
     | '/admin/'
     | '/app/'
+    | '/admin/campeonatos/$tournamentId'
+    | '/admin/campeonatos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -396,6 +421,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPartidasRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/campeonatos/': {
+      id: '/admin/campeonatos/'
+      path: '/campeonatos'
+      fullPath: '/admin/campeonatos/'
+      preLoaderRoute: typeof AdminCampeonatosIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/campeonatos/$tournamentId': {
+      id: '/admin/campeonatos/$tournamentId'
+      path: '/campeonatos/$tournamentId'
+      fullPath: '/admin/campeonatos/$tournamentId'
+      preLoaderRoute: typeof AdminCampeonatosTournamentIdRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
@@ -403,12 +442,16 @@ interface AdminRouteChildren {
   AdminPartidasRoute: typeof AdminPartidasRoute
   AdminSelecoesRoute: typeof AdminSelecoesRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminCampeonatosTournamentIdRoute: typeof AdminCampeonatosTournamentIdRoute
+  AdminCampeonatosIndexRoute: typeof AdminCampeonatosIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminPartidasRoute: AdminPartidasRoute,
   AdminSelecoesRoute: AdminSelecoesRoute,
   AdminIndexRoute: AdminIndexRoute,
+  AdminCampeonatosTournamentIdRoute: AdminCampeonatosTournamentIdRoute,
+  AdminCampeonatosIndexRoute: AdminCampeonatosIndexRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)

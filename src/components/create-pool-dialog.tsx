@@ -12,11 +12,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCreatePool } from "@/api/pools";
+import { PoolTournamentField } from "@/components/tournament-select";
+import { usePoolTournamentChoice } from "@/hooks/use-pool-tournament-choice";
 import { buildInviteUrl } from "@/lib/invite";
 import { useOnline } from "@/hooks/use-online";
 import { useAuthStore } from "@/store/auth-store";
-
-const tournamentId = import.meta.env.VITE_TOURNAMENT_ID;
 
 export function CreatePoolDialog({
   open,
@@ -31,6 +31,8 @@ export function CreatePoolDialog({
   const setPoolId = useAuthStore((s) => s.setPoolId);
   const online = useOnline();
   const createPool = useCreatePool();
+  const tournamentChoice = usePoolTournamentChoice();
+  const { tournamentId } = tournamentChoice;
 
   const reset = () => {
     setName("");
@@ -50,6 +52,10 @@ export function CreatePoolDialog({
     }
     if (!name.trim()) {
       toast.error("Dê um nome ao seu bolão");
+      return;
+    }
+    if (!tournamentId) {
+      toast.error("Escolha o campeonato");
       return;
     }
     createPool.mutate(
@@ -106,9 +112,18 @@ export function CreatePoolDialog({
               />
             </div>
 
+            <PoolTournamentField
+              tournaments={tournamentChoice.tournaments}
+              loading={tournamentChoice.loading}
+              value={tournamentId}
+              onChange={tournamentChoice.setTournamentId}
+            />
+
             <Button
               onClick={handleCreate}
-              disabled={createPool.isPending || !online}
+              disabled={
+                createPool.isPending || !online || tournamentChoice.tournaments.length === 0
+              }
               className="h-12 w-full gold-gradient text-base font-semibold text-primary-foreground hover:opacity-90"
             >
               {createPool.isPending ? "Criando..." : "Criar bolão"}

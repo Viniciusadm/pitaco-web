@@ -106,6 +106,62 @@ export interface TournamentDetailResponse {
   groups: GroupResponse[];
 }
 
+export type TournamentStatus = "draft" | "active" | "finished" | "archived";
+
+export type StageKind = "group" | "knockout";
+
+export interface TournamentResponse {
+  id: string;
+  name: string;
+  slug: string;
+  season_year: number | null;
+  starts_on: string | null;
+  ends_on: string | null;
+  status: TournamentStatus;
+}
+
+export interface TournamentsListResponse {
+  tournaments: TournamentResponse[];
+}
+
+export interface CreateTournamentRequest {
+  name: string;
+  slug: string;
+  season_year: number | null;
+  starts_on: string | null;
+  ends_on: string | null;
+}
+
+export interface UpdateTournamentRequest extends CreateTournamentRequest {
+  status: TournamentStatus;
+}
+
+export interface StageRequest {
+  name: string;
+  kind: StageKind;
+  ordering: number;
+}
+
+export interface GroupRequest {
+  label: string;
+}
+
+export interface TournamentTeamResponse {
+  id: string;
+  tournament_id: string;
+  team_id: string;
+  group_id: string | null;
+}
+
+export interface TournamentTeamsListResponse {
+  teams: TournamentTeamResponse[];
+}
+
+export interface AssignTeamRequest {
+  team_id: string;
+  group_id: string | null;
+}
+
 export interface LoginRequest {
   email: string;
   password: string;

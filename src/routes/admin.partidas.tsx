@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { CalendarX, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,7 +24,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { useOnline } from "@/hooks/use-online";
 import { useTeams } from "@/api/teams";
-import { useTournamentDetail } from "@/api/tournaments";
+import { useActiveTournaments, useTournamentDetail } from "@/api/tournaments";
+import { TournamentSelect } from "@/components/tournament-select";
 import {
   useMatches,
   useCreateMatch,
@@ -42,13 +43,23 @@ import {
 
 export const Route = createFileRoute("/admin/partidas")({
   head: () => ({ meta: [{ title: "Admin · Partidas" }] }),
+  validateSearch: (search: Record<string, unknown>): { tournament?: string } => ({
+    tournament: typeof search.tournament === "string" ? search.tournament : undefined,
+  }),
   component: AdminMatches,
 });
 
-const tournamentId = import.meta.env.VITE_TOURNAMENT_ID;
-
 function AdminMatches() {
   const online = useOnline();
+  const search = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const tournaments = useActiveTournaments();
+  const tournamentList = tournaments.data ?? [];
+  const tournamentId =
+    search.tournament && tournamentList.some((t) => t.id === search.tournament)
+      ? search.tournament
+      : (tournaments.active[0]?.id ?? tournamentList[0]?.id ?? "");
+  const selectTournament = (id: string) => navigate({ search: { tournament: id } });
   const tournament = useTournamentDetail(tournamentId);
   const teams = useTeams();
   const matches = useMatches(tournamentId);
@@ -218,32 +229,56 @@ function AdminMatches() {
     });
   };
 
-  const isPending = tournament.isPending || teams.isPending || matches.isPending;
-  const isError = tournament.isError || teams.isError || matches.isError;
+  const noTournaments = tournaments.isSuccess && tournamentList.length === 0;
+  const isPending =
+    tournaments.isPending || tournament.isPending || teams.isPending || matches.isPending;
+  const isError = tournaments.isError || tournament.isError || teams.isError || matches.isError;
 
   return (
     <div>
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-xl font-bold">Partidas</h1>
           <p className="text-xs text-muted-foreground">{matchList.length} cadastradas</p>
         </div>
-        <Button
-          onClick={startCreate}
-          disabled={!online}
-          className="gold-gradient text-primary-foreground hover:opacity-90"
-        >
-          <Plus className="mr-1 h-4 w-4" /> Nova partida
-        </Button>
+        <div className="flex flex-wrap items-center gap-2">
+          {tournamentList.length > 0 && (
+            <TournamentSelect
+              tournaments={tournamentList}
+              value={tournamentId}
+              onChange={selectTournament}
+              className="w-56"
+            />
+          )}
+          <Button
+            onClick={startCreate}
+            disabled={!online || !tournamentId}
+            className="gold-gradient text-primary-foreground hover:opacity-90"
+          >
+            <Plus className="mr-1 h-4 w-4" /> Nova partida
+          </Button>
+        </div>
       </div>
 
-      {isPending ? (
+      {noTournaments ? (
+        <div className="rounded-2xl border border-dashed border-border bg-surface/50 p-10 text-center">
+          <CalendarX className="mx-auto h-10 w-10 text-muted-foreground" />
+          <p className="mt-3 text-sm text-muted-foreground">Nenhum campeonato cadastrado.</p>
+          <Link
+            to="/admin/campeonatos"
+            className="mt-4 inline-flex items-center justify-center rounded-md gold-gradient px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Cadastrar campeonato
+          </Link>
+        </div>
+      ) : isPending ? (
         <Skeleton className="h-64 rounded-2xl" />
       ) : isError ? (
         <div className="rounded-2xl border border-border bg-card p-10 text-center">
           <p className="text-sm text-muted-foreground">Não foi possível carregar as partidas.</p>
           <button
             onClick={() => {
+              tournaments.refetch();
               tournament.refetch();
               teams.refetch();
               matches.refetch();
